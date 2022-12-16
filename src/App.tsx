@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Header from './features/Header/Header'
+import Footer from './features/Footer/Footer'
+import EnterPlayerInfo from './features/EnterPlayerInfo/EnterPlayerInfo'
+import InitializeApp from './features/InitializeApp/InitializeApp'
+import JoinRoom from './features/JoinRoom/JoinRoom'
+import PlayerCard from './features/PlayerCard/PlayerCard'
+import SetVP from './features/SetVP/SetVP'
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      }
     </div>
   );
 }
