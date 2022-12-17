@@ -1,0 +1,11 @@
+.initialize-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.initialize-app button {
+    height: 50px;
+    width: 150px;
+}

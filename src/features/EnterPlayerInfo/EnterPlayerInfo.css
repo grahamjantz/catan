@@ -1,0 +1,9 @@
+.enter-player-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.enter-player-info form {
+    display: flex;
+    flex-direction: column;
+}
