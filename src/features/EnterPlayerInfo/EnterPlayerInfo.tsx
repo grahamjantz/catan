@@ -1,6 +1,8 @@
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
+import { dbFS } from '../SetVP/SetVP'
 import './EnterPlayerInfo.css'
 
 const EnterPlayerInfo = () => {
@@ -13,6 +15,10 @@ const EnterPlayerInfo = () => {
   const [colour, setColour] = useState<string>('')
   
   const roomId = searchParams.get('room-id')
+  let id: string;
+  if (roomId !== null) {
+    id = roomId.toString().toUpperCase()
+  }
   
   const generatePlayerId = () => {
     let id;
@@ -23,10 +29,21 @@ const EnterPlayerInfo = () => {
   }
   const playerId = generatePlayerId()
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
     if(name !== '' && colour !== '') {
-      console.log(name, colour, playerId)
-      console.log(roomId)
+
+      const docRef = doc(dbFS, 'rooms', id)
+      await updateDoc(docRef, {
+        'players': arrayUnion({
+          name: name,
+          colour: colour,
+          player_id: playerId,
+          active: true,
+          victory_points: 0
+        })
+      })
+
       navigate(`/player-card?room-id=${roomId}&player_id=${playerId}`)
     }
   }

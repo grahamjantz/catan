@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './PlayerCard.css'
+
+import { collection, query, where, onSnapshot, DocumentData } from "firebase/firestore";
+import { dbFS } from '../SetVP/SetVP';
+import { useSearchParams } from 'react-router-dom';
 
 const PlayerCard = () => {
 
@@ -10,6 +14,38 @@ const PlayerCard = () => {
   let [wheat, setWheat] = useState<number>(0)
   let [vp, setVp] = useState<number>(0)
   const [insufficientFunds, setInsufficientFunds] = useState<boolean>(false)
+  const [players, setPlayers] = useState<any[]>()
+  const [playersListSorted, setPlayersListSorted] = useState()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const roomId = searchParams.get('room_id')
+  let id:string;
+  if (roomId !== null) {
+    id = roomId.toString().toUpperCase()
+  }
+  // console.log(id)
+  const playerId = searchParams.get('player_id')
+  
+  useEffect(() => {
+    const q = query(collection(dbFS, "rooms"), where("room_id", "==", id));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const players: any[] = [];
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data())
+          players.push(doc.data());
+      });
+      setPlayers(players)
+      console.log(players)
+      if (players) {
+        // const sort = players.sort((a:number, b: number) => b.victory_points - a.victory_points).sort((a: boolean, b: boolean) => b.active - a.active)
+        // setPlayersListSorted(sort)
+      }
+    });
+    return () => {
+      unsubscribe()
+    }
+  }, [roomId])
 
   const handleClickRoad = async () => {
     if (wood >= 1 && brick >= 1) {
@@ -30,6 +66,11 @@ const PlayerCard = () => {
       setWheat(wheat -= 1)
       setSheep(sheep -= 1)
       setVp(vp += 1)
+    } else {
+      setInsufficientFunds(true) 
+      setTimeout(() => {
+        setInsufficientFunds(false)
+      }, 1500)
     }
   }
   
@@ -39,6 +80,11 @@ const PlayerCard = () => {
       setOre(ore -= 3)
       setWheat(wheat -= 2)
       setVp(vp += 1)
+    } else {
+      setInsufficientFunds(true) 
+      setTimeout(() => {
+        setInsufficientFunds(false)
+      }, 1500)
     }
   }
 
@@ -47,6 +93,11 @@ const PlayerCard = () => {
       setSheep(sheep -= 1)
       setOre(ore -= 1)
       setWheat(wheat -= 1)
+    } else {
+      setInsufficientFunds(true) 
+      setTimeout(() => {
+        setInsufficientFunds(false)
+      }, 1500)
     }
   }
 

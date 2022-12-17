@@ -1,8 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 const Header = () => {
+  
+  const navigate = useNavigate()
+
+  const handleClickHeader = () => {
+    navigate('/')
+  }
+
   return (
-    <header>Header</header>
+    <header onClick={handleClickHeader}>Header</header>
   )
 }
 

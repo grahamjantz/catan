@@ -22,7 +22,7 @@ const InitializeApp = () => {
           return id
   }
 
-  const roomId = generateRoomId()
+  const roomId = generateRoomId().toUpperCase()
 
 
   const handleClickHost = async () => {
@@ -32,6 +32,7 @@ const InitializeApp = () => {
     await setDoc(doc(db, 'rooms', roomId), {
       'players': [],
       'points-to-win': 10,
+      'room_id': roomId
     })
 
     navigate(`/set-vp?room_id=${roomId}`)

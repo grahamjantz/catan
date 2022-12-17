@@ -16,11 +16,12 @@ const SetVP = () => {
 
   const handleClickAccept = async () => {
     console.log('accept')
-
+    
   }
 
   return (
     <div className='set-vp'>
+      <h4>Enter Amount of Victory Points to Win:</h4>
       <div>
         <button onClick={() => setCount(count -= 1)}>-</button>
         <p>{count}</p>
