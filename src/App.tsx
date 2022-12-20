@@ -3,7 +3,7 @@ import './App.css'
 
 import Header from './features/Header/Header'
 import Footer from './features/Footer/Footer'
-import EnterPlayerInfo from './features/EnterPlayerInfo/EnterPlayerInfo'
+import EnterPlayerInfo from './features/EnterPlayerInfo/EnterPlayerInfo';
 import InitializeApp from './features/InitializeApp/InitializeApp'
 import JoinRoom from './features/JoinRoom/JoinRoom'
 import PlayerCard from './features/PlayerCard/PlayerCard'

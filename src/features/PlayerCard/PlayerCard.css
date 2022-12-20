@@ -1,5 +1,4 @@
 .player-card {
-    height: calc(100vh - 160px);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -7,11 +6,24 @@
     gap: 2rem;
 }
 
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .leaderboard div {
     height: fit-content;
     width: 100%;
     display: flex;
     justify-content: space-around;
+}
+
+.leaderboard-player {
+    width: 50% !important;
+    display: flex;
+    justify-content: space-between !important;
 }
 
 .get-resource-actions {
@@ -31,6 +43,22 @@
 .get-resource-actions span {
     display: flex;
     flex-direction: column;
+}
+
+.button-footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-size: 3rem;
+}
+
+.button-footer button{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .buy-items {

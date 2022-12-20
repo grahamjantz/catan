@@ -12,7 +12,7 @@ const JoinRoom = () => {
     e.preventDefault()
     if (roomId && roomId !== '') {
       setRoomId('')
-      navigate(`/enter-player-info?room-id=${roomId}`)
+      navigate(`/enter-player-info?room_id=${roomId.toUpperCase()}`)
     }
   }
 

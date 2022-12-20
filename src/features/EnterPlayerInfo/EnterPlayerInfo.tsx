@@ -1,50 +1,54 @@
+// @ts-nocheck
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
 import { dbFS } from '../SetVP/SetVP'
 import './EnterPlayerInfo.css'
 
-const EnterPlayerInfo = () => {
+const EnterPlayerInfo = () : any => {
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
 
-  
-  const [name, setName] = useState<string>('')
-  const [colour, setColour] = useState<string>('')
-  
-  const roomId = searchParams.get('room-id')
-  let id: string;
-  if (roomId !== null) {
-    id = roomId.toString().toUpperCase()
-  }
+  const [name, setName] = useState('')
+  const [colour, setColour] = useState('')
+
+    const roomId = searchParams.get('room_id')
+  console.log(roomId)  
   
   const generatePlayerId = () => {
     let id;
     for (let i=0; i<8; i++) {
       id = Math.floor(Math.random() * 10000000).toString(26).toUpperCase()
     }
-    return id
+    return id;
   }
   const playerId = generatePlayerId()
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if(name !== '' && colour !== '') {
 
-      const docRef = doc(dbFS, 'rooms', id)
+      const docRef = doc(dbFS, 'rooms', roomId)
       await updateDoc(docRef, {
         'players': arrayUnion({
           name: name,
           colour: colour,
           player_id: playerId,
           active: true,
-          victory_points: 0
+          victory_points: 0,
+          items: {
+            wood: 0,
+            brick: 0,
+            wheat: 0,
+            ore: 0,
+            sheep: 0
+          },
         })
       })
 
-      navigate(`/player-card?room-id=${roomId}&player_id=${playerId}`)
+      navigate(`/player-card?room_id=${roomId}&player_id=${playerId}`)
     }
   }
 
