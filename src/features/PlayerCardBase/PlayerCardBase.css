@@ -3,10 +3,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
     gap: 2rem;
 }
 
 .leaderboard {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,12 +63,26 @@
     justify-content: center;
 }
 
+hr {
+    width: 90%;
+    height: 1px;
+}
+
 .buy-items {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.buy-items div {
     width: 100%;
     display: flex;
-    align-items: center;
+    gap: 1rem;
 }
 
 .buy-items button {
-    width: 25%;
+    width: 50%;
 }

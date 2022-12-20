@@ -31,7 +31,7 @@ const InitializeApp = () => {
 
     await setDoc(doc(db, 'rooms', roomId), {
       'players': [],
-      'points-to-win': 10,
+      'points_to_win': 10,
       'room_id': roomId
     })
 

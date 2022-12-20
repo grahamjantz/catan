@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
 import { dbFS } from '../SetVP/SetVP'
@@ -14,9 +14,9 @@ const EnterPlayerInfo = () : any => {
   const [name, setName] = useState('')
   const [colour, setColour] = useState('')
 
-    const roomId = searchParams.get('room_id')
-  console.log(roomId)  
-  
+  const roomId = searchParams.get('room_id')
+  const expansion = searchParams.get('expansion')
+
   const generatePlayerId = () => {
     let id;
     for (let i=0; i<8; i++) {
@@ -29,26 +29,48 @@ const EnterPlayerInfo = () : any => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if(name !== '' && colour !== '') {
-
-      const docRef = doc(dbFS, 'rooms', roomId)
-      await updateDoc(docRef, {
-        'players': arrayUnion({
-          name: name,
-          colour: colour,
-          player_id: playerId,
-          active: true,
-          victory_points: 0,
-          items: {
-            wood: 0,
-            brick: 0,
-            wheat: 0,
-            ore: 0,
-            sheep: 0
-          },
+      if (expansion === 'none') {
+        const docRef = doc(dbFS, 'rooms', roomId)
+        await updateDoc(docRef, {
+          'players': arrayUnion({
+            name: name,
+            colour: colour,
+            player_id: playerId,
+            active: true,
+            victory_points: 0,
+            items: {
+              wood: 0,
+              brick: 0,
+              wheat: 0,
+              ore: 0,
+              sheep: 0
+            },
+          })
         })
-      })
-
-      navigate(`/player-card?room_id=${roomId}&player_id=${playerId}`)
+        navigate(`/player-card-base?room_id=${roomId}&player_id=${playerId}&expansion=${expansion}`)
+      } else if (expansion === 'cities-knights') {
+        const docRef = doc(dbFS, 'rooms', roomId)
+        await updateDoc(docRef, {
+          'players': arrayUnion({
+            name: name,
+            colour: colour,
+            player_id: playerId,
+            active: true,
+            victory_points: 0,
+            items: {
+              wood: 0,
+              brick: 0,
+              wheat: 0,
+              ore: 0,
+              sheep: 0,
+              paper: 0,
+              cloth: 0,
+              coin: 0
+            },
+          })
+        })
+        navigate(`/player-card-cities-knights?room_id=${roomId}&player_id=${playerId}&expansion=${expansion}`)
+      }
     }
   }
 
