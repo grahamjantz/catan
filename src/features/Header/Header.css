@@ -1,0 +1,11 @@
+header {
+    width: 100%;
+    height: fit-content;
+    max-height: 150px;
+}
+
+header img {
+    width: 70%;
+    height: auto;
+    max-height: 100%;
+}

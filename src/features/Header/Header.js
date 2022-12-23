@@ -1,5 +1,11 @@
+// @ts-nocheck
 import React from 'react'
+
+import './Header.css'
+
 import { useNavigate } from 'react-router'
+
+import logo from '../../images/settlers-of-catan-logo.png'
 
 const Header = () => {
   
@@ -10,7 +16,9 @@ const Header = () => {
   }
 
   return (
-    <header onClick={handleClickHeader}>Header</header>
+    <header onClick={handleClickHeader}>
+      <img src={logo} alt='logo'/>
+    </header>
   )
 }
 

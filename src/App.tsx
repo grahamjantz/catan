@@ -12,6 +12,7 @@ import SetVP from './features/SetVP/SetVP'
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import SelectExpansion from './features/SelectExpansion/SelectExpansion';
+import EndGame from './features/EndGame/EndGame';
 
 
 
@@ -22,11 +23,12 @@ function App() {
       <Routes>
         <Route path='/' element={<InitializeApp />}></Route>
         <Route path='/join-room' element={<JoinRoom />}></Route>
+        <Route path='/set-vp' element={<SetVP />}></Route>
+        <Route path='/select-expansion' element={<SelectExpansion />}></Route>
         <Route path='/enter-player-info' element={<EnterPlayerInfo />}></Route>
         <Route path='/player-card-base' element={<PlayerCardBase />}></Route>
         <Route path='/player-card-cities-knights' element={<PlayerCardCitiesKnights />}></Route>
-        <Route path='/set-vp' element={<SetVP />}></Route>
-        <Route path='/select-expansion' element={<SelectExpansion />}></Route>
+        <Route path='/end-game' element={<EndGame />}></Route>
       </Routes>
       <Footer />
     </div>

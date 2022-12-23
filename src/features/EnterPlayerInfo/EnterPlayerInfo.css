@@ -1,4 +1,5 @@
 .enter-player-info {
+    width: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -6,4 +7,30 @@
 .enter-player-info form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.enter-player-info form input, .enter-player-info form select {
+    width: 100%;
+    font-size: 3rem;
+    color: var(--main-yellow2);
+    border-color: var(--main-yellow2);
+}
+
+.enter-player-info form select option {
+    font-size: 2rem;
+    width: fit-content;
+    max-width: 100vw;
+    background-color: var(--main-red);
+}
+
+.enter-player-info form input:last-of-type {
+    width: 100px;
+    height: 50px;
+    font-size: 2rem;
+    background-color: var(--main-yellow2);
+    color: black;
+    border: none;
+    border-radius: 7px;
 }

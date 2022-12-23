@@ -1,3 +1,7 @@
+.winner {
+    color: var(--main-green);
+}
+
 .player-card {
     width: 100%;
     display: flex;
@@ -8,11 +12,16 @@
 }
 
 .leaderboard {
-    width: 100%;
+    width: 90%;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 2px solid var(--main-yellow);
+    background-color: var(--main-yellow2);
+    border-radius: 7px;
+    color: var(--main-red)
 }
 
 .leaderboard div {
@@ -23,7 +32,7 @@
 }
 
 .leaderboard-player {
-    width: 50% !important;
+    width: 90% !important;
     display: flex;
     justify-content: space-between !important;
 }
@@ -85,4 +94,41 @@ hr {
 
 .buy-items button {
     width: 50%;
+}
+
+.wood {
+    background-image: url('../../images/icons/wood.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.sheep {
+    background-image: url('../../images/icons/sheep.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.ore {
+    background-image: url('../../images/icons/ore.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.brick {
+    background-image: url('../../images/icons/brick.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.wheat {
+    background-image: url('../../images/icons/wheat.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.vp {
+    background-image: url('../../images/icons/vp.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

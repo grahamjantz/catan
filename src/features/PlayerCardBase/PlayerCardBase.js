@@ -193,12 +193,12 @@ const handleDecrementItem = async (item) => {
 
   return (
     <div className='player-card'>
-        <h3>Leaderboard</h3>
       <div className='leaderboard'>
+        <h2>Leaderboard</h2>
           {playersListSorted ? (
             playersListSorted.map((player) => {
               return (
-                <div key={player.player_id} className='leaderboard-player'>
+                <div key={player.player_id} className={`leaderboard-player ${player.victory_points >= 10 ? 'winner' : ''}`}>
                   <h4>{player.name}</h4>
                   <h4>{player.victory_points}</h4>
                 </div>
@@ -211,21 +211,21 @@ const handleDecrementItem = async (item) => {
 {/* ---------- GET RESOURCE ACTIONS ROW 1 ---------- */}
         <div>
           <span>
-            <button onClick={() => handleClickItem('wood')}>Wood</button>
+            <button onClick={() => handleClickItem('wood')} className='wood'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('wood')}>-1</button>
               <p>{items.wood}</p>
             </div>
           </span>
           <span>
-            <button onClick={() => handleClickItem('sheep')}>Sheep</button>
+            <button onClick={() => handleClickItem('sheep')} className='sheep'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('sheep')}>-1</button>
               <p>{items.sheep}</p>
             </div>
           </span>
           <span>
-            <button onClick={() => handleClickItem('ore')}>Ore</button>
+            <button onClick={() => handleClickItem('ore')} className='ore'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('ore')}>-1</button>
               <p>{items.ore}</p>
@@ -236,21 +236,21 @@ const handleDecrementItem = async (item) => {
 {/* ---------- GET RESOURCE ACTIONS ROW 2 ---------- */}
         <div>
           <span>
-            <button onClick={() => handleClickItem('brick')}>Brick</button>
+            <button onClick={() => handleClickItem('brick')} className='brick'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('brick')}>-1</button>
               <p>{items.brick}</p>
             </div>
           </span>
           <span>
-            <button onClick={() => handleClickItem('wheat')}>Wheat</button>
+            <button onClick={() => handleClickItem('wheat')} className='wheat'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('wheat')}>-1</button>
               <p>{items.wheat}</p>
             </div>
           </span>
           <span>
-            <button onClick={() => handleClickItem('vp')}>V.P.</button>
+            <button onClick={() => handleClickItem('vp')} className='vp'></button>
             <div className='button-footer'>
               <button onClick={() => handleDecrementItem('vp')}>-1</button>
               <p>{vp}</p>

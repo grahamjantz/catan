@@ -194,6 +194,12 @@ const handleDecrementItem = async (item) => {
           } else {
             handleInsufficientFunds()
           }
+        } else if (item === 'activate-knight') {
+          if (player.items.wheat >= 1) {
+            player.items.wheat--
+          } else {
+            handleInsufficientFunds()
+          }
         } else if (item === 'yellow-city-improvement') {
           if (player.items.cloth >= 1) {
             player.items.cloth--
@@ -229,12 +235,12 @@ const handleDecrementItem = async (item) => {
 
   return (
     <div className='player-card'>
-        <h3>Leaderboard</h3>
       <div className='leaderboard'>
+        <h3>Leaderboard</h3>
           {playersListSorted ? (
             playersListSorted.map((player) => {
               return (
-                <div key={player.player_id} className='leaderboard-player'>
+                <div key={player.player_id} className={`leaderboard-player ${player.victory_points >= 10 ? 'winner' : ''}`}>
                   <h4>{player.name}</h4>
                   <h4>{player.victory_points}</h4>
                 </div>
@@ -247,51 +253,51 @@ const handleDecrementItem = async (item) => {
 {/* ---------- GET RESOURCE ACTIONS ROW 1 ---------- */}
         <div>
           <span>
+            <div className='cities-button-footer'>
+              <p>{items.wood}</p>
+            </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('wood')}>Wood</button>
               <button onClick={() => handleDecrementItem('wood')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.wood}</p>
+            <div className='cities-button-footer'>
+              <p>{items.paper}</p>
             </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('paper')}>Paper</button>
               <button onClick={() => handleDecrementItem('paper')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.paper}</p>
-            </div>
           </span>
           <span>
-          <div className='button-header'>
+            <div className='cities-button-footer'>
+              <p>{items.sheep}</p>
+            </div>
+            <div className='button-header'>
               <button onClick={() => handleClickItem('sheep')}>Sheep</button>
               <button onClick={() => handleDecrementItem('sheep')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.sheep}</p>
+            <div className='cities-button-footer'>
+              <p>{items.cloth}</p>
             </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('cloth')}>Cloth</button>
               <button onClick={() => handleDecrementItem('cloth')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.cloth}</p>
-            </div>
           </span>
           <span>
+            <div className='cities-button-footer'>
+              <p>{items.ore}</p>
+            </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('ore')}>Ore</button>
               <button onClick={() => handleDecrementItem('ore')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.ore}</p>
+            <div className='cities-button-footer'>
+              <p>{items.coin}</p>
             </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('coin')}>Coin</button>
               <button onClick={() => handleDecrementItem('coin')}>-1</button>
-            </div>
-            <div className='button-footer'>
-              <p>{items.coin}</p>
             </div>
           </span>
         </div>
@@ -299,30 +305,30 @@ const handleDecrementItem = async (item) => {
 {/* ---------- GET RESOURCE ACTIONS ROW 2 ---------- */}
         <div>
         <span>
+            <div className='cities-button-footer'>
+              <p>{items.brick}</p>
+            </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('brick')}>Brick</button>
               <button onClick={() => handleDecrementItem('brick')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.brick}</p>
-            </div>
           </span>
           <span>
+            <div className='cities-button-footer'>
+              <p>{items.wheat}</p>
+            </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('wheat')}>Wheat</button>
               <button onClick={() => handleDecrementItem('wheat')}>-1</button>
             </div>
-            <div className='button-footer'>
-              <p>{items.wheat}</p>
-            </div>
           </span>
           <span>
+            <div className='cities-button-footer'>
+              <p>{vp}</p>
+            </div>
             <div className='button-header'>
               <button onClick={() => handleClickItem('vp')}>V.P.</button>
               <button onClick={() => handleDecrementItem('vp')}>-1</button>
-            </div>
-            <div className='button-footer'>
-              <p>{vp}</p>
             </div>
           </span>
         </div>
@@ -343,7 +349,10 @@ const handleDecrementItem = async (item) => {
             <button onClick={() => handleClickBuy('city')}>City</button>
             <button onClick={() => handleClickBuy('city wall')}>City Wall</button>
           </span>
-          <button onClick={() => handleClickBuy('knight')}>Knight</button>
+          <span className='city-buyers'>
+            <button onClick={() => handleClickBuy('knight')}>Knight</button>
+            <button onClick={() => handleClickBuy('activate-knight')}>Activate Knight</button>
+          </span>
         </div>
       </div>
 

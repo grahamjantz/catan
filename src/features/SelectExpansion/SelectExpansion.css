@@ -3,6 +3,8 @@
 }
 
 .select-expansion fieldset {
+    border-color: var(--main-yellow2);
+    border-radius: 7px;
     width: 100%;
     padding: 2rem;
     display: flex;
@@ -11,15 +13,19 @@
     gap: 2rem;
 }
 
-.select-expansion fieldset input {
-    width: 2rem;
-    height: 2rem;
+.select-expansion fieldset input:last-of-type {
+    padding: 0.5rem;
+    width: 30px;
+    height: 30px;
+    font-size: 2rem;
+    background-color: var(--main-yellow2);
+    border: none;
+    border-radius: 7px;
 }
 
-.select-expansion fieldset input:last-of-type {
-    width: fit-content;
-    height: fit-content;
-    padding: 0.5rem;
+.accept {
+    width: 100px;
+    height: 50px;
 }
 
 .select-expansion fieldset div {

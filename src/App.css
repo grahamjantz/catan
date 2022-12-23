@@ -7,19 +7,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 2rem;
   font-size: 2rem;
+  color: var(--main-yellow2);
 }
 
 button {
   width: 100px;
   height: 100px;
   font-size: 2rem;
+  background-color: var(--main-yellow2);
+  border: none;
+  border-radius: 7px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--main-yellow);
 }
 
 input {
   font-size: 2rem;
   border: 1px solid black;
+}
+
+input::placeholder {
+  color: var(--main-yellow2);
 }
 
 select {
@@ -29,4 +43,8 @@ select {
 header, footer {
   height: 80px;
   width: 100%;
+}
+
+li {
+  list-style: none;
 }

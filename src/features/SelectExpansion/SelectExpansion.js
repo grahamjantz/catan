@@ -1,6 +1,9 @@
+// @ts-nocheck
+import { doc, updateDoc } from 'firebase/firestore'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useSearchParams } from 'react-router-dom'
+import { dbFS } from '../SetVP/SetVP'
 import './SelectExpansion.css'
 
 const SelectExpansion = () => {
@@ -13,13 +16,25 @@ const SelectExpansion = () => {
 
   const roomId = searchParams.get('room_id')
 
+  let docRef;
+
+  if (roomId) {
+    docRef = doc(dbFS, 'rooms', roomId)
+  }
+  
   const handleSubmit = async () => {
     if (selectBaseGame === false) {
       return 0
     } else {
       if (selectCitiesKnights === false) {
+        await updateDoc(docRef, {
+          expansion: 'none'
+        })
         navigate(`/enter-player-info?room_id=${roomId}&expansion=none`)
       } else {
+        await updateDoc(docRef, {
+          expansion: 'cities-knights'
+        })
         navigate(`/enter-player-info?room_id=${roomId}&expansion=cities-knights`)
       }
     }
@@ -27,7 +42,7 @@ const SelectExpansion = () => {
   
   return (
     <div className='select-expansion'>
-      <h4>Select Expansion:</h4>
+      <h2>Select Expansion:</h2>
       <fieldset>
         <legend>Select:</legend>
 
@@ -38,7 +53,9 @@ const SelectExpansion = () => {
              onChange={() => 
               selectBaseGame === false 
               ? setSelectBaseGame(true) 
-              : setSelectBaseGame(false)}/>
+              : setSelectBaseGame(false)}
+              className='checkbox'
+              />
         </div>
 
         <div>
@@ -47,9 +64,11 @@ const SelectExpansion = () => {
           onChange={() => 
             selectCitiesKnights === false 
             ? setSelectCitiesKnights(true) 
-            : setSelectCitiesKnights(false)}/>
+            : setSelectCitiesKnights(false)}
+            className='checkbox'
+            />
         </div>
-        <input type='submit' value='Accept' onClick={handleSubmit}/>
+        <button onClick={handleSubmit} className='accept'>Accept</button>
       </fieldset>
     </div>
   )
