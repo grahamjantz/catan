@@ -5,6 +5,7 @@ import './PlayerCardCitiesKnights.css'
 import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { dbFS } from '../SetVP/SetVP';
 import { useSearchParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const PlayerCardCitiesKnights = () => {
 
@@ -361,6 +362,7 @@ const handleDecrementItem = async (item) => {
         <button onClick={() => handleClickBuy('blue-city-improvement')}>Blue City Improvement</button>
         <button onClick={() => handleClickBuy('green-city-improvement')}>Green City Improvement</button>
       </div>
+      <Footer />
     </div>
   )
 }

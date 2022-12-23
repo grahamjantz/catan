@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css'
 
 import Header from './features/Header/Header'
-import Footer from './features/Footer/Footer'
 import EnterPlayerInfo from './features/EnterPlayerInfo/EnterPlayerInfo';
 import InitializeApp from './features/InitializeApp/InitializeApp'
 import JoinRoom from './features/JoinRoom/JoinRoom'
@@ -30,7 +29,6 @@ function App() {
         <Route path='/player-card-cities-knights' element={<PlayerCardCitiesKnights />}></Route>
         <Route path='/end-game' element={<EndGame />}></Route>
       </Routes>
-      <Footer />
     </div>
   );
 }

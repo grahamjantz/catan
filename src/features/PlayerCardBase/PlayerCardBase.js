@@ -5,6 +5,7 @@ import './PlayerCardBase.css'
 import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/firestore";
 import { dbFS } from '../SetVP/SetVP';
 import { useSearchParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const PlayerCardBase = () => {
 
@@ -274,6 +275,7 @@ const handleDecrementItem = async (item) => {
           <button onClick={() => handleClickBuy('dev card')}>Dev. Card</button>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
