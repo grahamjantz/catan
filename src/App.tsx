@@ -5,8 +5,7 @@ import Header from './features/Header/Header'
 import EnterPlayerInfo from './features/EnterPlayerInfo/EnterPlayerInfo';
 import InitializeApp from './features/InitializeApp/InitializeApp'
 import JoinRoom from './features/JoinRoom/JoinRoom'
-import PlayerCardBase from './features/PlayerCardBase/PlayerCardBase'
-import PlayerCardCitiesKnights from './features/PlayerCardCitiesKnights/PlayerCardCitiesKnights'
+import PlayerCard from './features/PlayerCard/PlayerCard'
 import SetVP from './features/SetVP/SetVP'
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
@@ -25,8 +24,7 @@ function App() {
         <Route path='/set-vp' element={<SetVP />}></Route>
         <Route path='/select-expansion' element={<SelectExpansion />}></Route>
         <Route path='/enter-player-info' element={<EnterPlayerInfo />}></Route>
-        <Route path='/player-card-base' element={<PlayerCardBase />}></Route>
-        <Route path='/player-card-cities-knights' element={<PlayerCardCitiesKnights />}></Route>
+        <Route path='/player-card' element={<PlayerCard />}></Route>
         <Route path='/end-game' element={<EndGame />}></Route>
       </Routes>
     </div>

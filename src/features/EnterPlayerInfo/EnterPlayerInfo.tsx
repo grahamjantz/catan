@@ -15,7 +15,6 @@ const EnterPlayerInfo = () : any => {
   const [colour, setColour] = useState('')
 
   const roomId = searchParams.get('room_id')
-  const expansion = searchParams.get('expansion')
 
   const generatePlayerId = () => {
     let id;
@@ -29,48 +28,24 @@ const EnterPlayerInfo = () : any => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if(name !== '' && colour !== '') {
-      if (expansion === 'none') {
-        const docRef = doc(dbFS, 'rooms', roomId)
-        await updateDoc(docRef, {
-          'players': arrayUnion({
-            name: name,
-            colour: colour,
-            player_id: playerId,
-            active: true,
-            victory_points: 0,
-            items: {
-              wood: 0,
-              brick: 0,
-              wheat: 0,
-              ore: 0,
-              sheep: 0
-            },
-          })
+      const docRef = doc(dbFS, 'rooms', roomId)
+      await updateDoc(docRef, {
+        'players': arrayUnion({
+          name: name,
+          colour: colour,
+          player_id: playerId,
+          active: true,
+          victory_points: 0,
+          items: {
+            wood: 0,
+            brick: 0,
+            wheat: 0,
+            ore: 0,
+            sheep: 0
+          },
         })
-        navigate(`/player-card-base?room_id=${roomId}&player_id=${playerId}&expansion=${expansion}`)
-      } else if (expansion === 'cities-knights') {
-        const docRef = doc(dbFS, 'rooms', roomId)
-        await updateDoc(docRef, {
-          'players': arrayUnion({
-            name: name,
-            colour: colour,
-            player_id: playerId,
-            active: true,
-            victory_points: 0,
-            items: {
-              wood: 0,
-              brick: 0,
-              wheat: 0,
-              ore: 0,
-              sheep: 0,
-              paper: 0,
-              cloth: 0,
-              coin: 0
-            },
-          })
-        })
-        navigate(`/player-card-cities-knights?room_id=${roomId}&player_id=${playerId}&expansion=${expansion}`)
-      }
+      })
+      navigate(`/player-card?room_id=${roomId}&player_id=${playerId}`)
     }
   }
 

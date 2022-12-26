@@ -1,8 +1,12 @@
 :root {
   --main-yellow: #feec81;
   --main-red: #d72212;
+  --main-red2: #b13125;
+  --main-red3: #9e0d00;
   --main-yellow2: #EFB103;
   --main-green: #517d19;
+  --main-beige : #F5DEB4;
+  --main-black-dim: rgb(0, 0, 0, 0.5);
 }
 
 body {

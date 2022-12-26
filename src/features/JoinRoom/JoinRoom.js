@@ -9,14 +9,12 @@ import './JoinRoom.css'
 const JoinRoom = () => {
 
   const [roomId, setRoomId] = useState('')
-  const [expansion, setExpansion] = useState('')
 
   useEffect(() => {
     const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const players= [];
       querySnapshot.forEach((doc) => {
-        setExpansion(doc.data().expansion)
         players.push(doc.data().players);
       });
     });
@@ -31,7 +29,7 @@ const JoinRoom = () => {
     e.preventDefault()
     if (roomId && roomId !== '') {
       setRoomId('')
-      navigate(`/enter-player-info?room_id=${roomId.toUpperCase().trim()}&&expansion=${expansion}`)
+      navigate(`/enter-player-info?room_id=${roomId.toUpperCase().trim()}`)
     }
   }
 

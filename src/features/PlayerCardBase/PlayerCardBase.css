@@ -1,7 +1,3 @@
-.winner {
-    color: var(--main-green);
-}
-
 .player-card {
     width: 100%;
     display: flex;
@@ -11,33 +7,10 @@
     gap: 2rem;
 }
 
-.leaderboard {
-    width: 90%;
-    padding-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid var(--main-yellow);
-    background-color: var(--main-yellow2);
-    border-radius: 7px;
-    color: var(--main-red)
-}
 
-.leaderboard div {
-    height: fit-content;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.leaderboard-player {
-    width: 90% !important;
-    display: flex;
-    justify-content: space-between !important;
-}
 
 .get-resource-actions {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,39 +69,3 @@ hr {
     width: 50%;
 }
 
-.wood {
-    background-image: url('../../images/icons/wood.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.sheep {
-    background-image: url('../../images/icons/sheep.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.ore {
-    background-image: url('../../images/icons/ore.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.brick {
-    background-image: url('../../images/icons/brick.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.wheat {
-    background-image: url('../../images/icons/wheat.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.vp {
-    background-image: url('../../images/icons/vp.jpg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}

@@ -7,5 +7,13 @@ footer {
 }
 
 footer button {
+    width: 90%;
     height: 50px;
+    background-color: var(--main-red);
+    border: 2px solid var(--main-red2);
+    border-radius: 2px;
+}
+
+footer button:hover {
+    background-color: var(--main-red3);
 }

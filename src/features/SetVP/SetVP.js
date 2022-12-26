@@ -55,6 +55,7 @@ const SetVP = () => {
 
   return (
     <div className='set-vp'>
+      <h2>Room Code: {roomId}</h2>
       <h2>Enter Amount of Victory Points to Win:</h2>
       <div>
         <button onClick={() => handleClickChangeAmount('decrement')}>-</button>

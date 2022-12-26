@@ -30,12 +30,12 @@ const SelectExpansion = () => {
         await updateDoc(docRef, {
           expansion: 'none'
         })
-        navigate(`/enter-player-info?room_id=${roomId}&expansion=none`)
+        navigate(`/enter-player-info?room_id=${roomId}`)
       } else {
         await updateDoc(docRef, {
           expansion: 'cities-knights'
         })
-        navigate(`/enter-player-info?room_id=${roomId}&expansion=cities-knights`)
+        navigate(`/enter-player-info?room_id=${roomId}`)
       }
     }
   }
