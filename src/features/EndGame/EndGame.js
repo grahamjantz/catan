@@ -11,34 +11,35 @@ const EndGame = () => {
 
     const [players, setPlayers] = useState([])
     const [playersListSorted, setPlayersListSorted] = useState([])
+    console.log(players)
 
     const [searchParams, setSearchParams] = useSearchParams()
 
     const roomId = searchParams.get('room_id')
 
     useEffect(() => {
-        const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-          const players= [];
-          querySnapshot.forEach((doc) => {
-            players.push(doc.data().players);
-          });
-          setPlayers(players[0])
-          if (players[0] !== []) {
-            const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
-            setPlayersListSorted(sort)
-          }
+      const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const players= [];
+        querySnapshot.forEach((doc) => {
+          players.push(doc.data().players);
         });
-        return () => {
-          unsubscribe()
+        setPlayers(players[0])
+        if (players[0] !== []) {
+          const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
+          setPlayersListSorted(sort)
         }
-      }, [roomId])
+      });
+      return () => {
+        unsubscribe()
+      }
+    }, [roomId])
 
   return (
     <div className='end-game'>
         <div>
             <h2>Winner: </h2>
-            <h2>{playersListSorted[0].name}</h2>
+            <h2>{playersListSorted ? playersListSorted[0].name : ''}</h2>
         </div>
         <ul>
             {playersListSorted !== [] ? (

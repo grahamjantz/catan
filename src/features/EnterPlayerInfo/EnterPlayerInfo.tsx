@@ -41,7 +41,10 @@ const EnterPlayerInfo = () : any => {
             brick: 0,
             wheat: 0,
             ore: 0,
-            sheep: 0
+            sheep: 0,
+            paper: 0,
+            cloth: 0,
+            coin: 0
           },
         })
       })

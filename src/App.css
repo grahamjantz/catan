@@ -20,6 +20,7 @@ button {
   background-color: var(--main-yellow2);
   border: none;
   border-radius: 7px;
+  color: black;
 }
 
 button:hover {

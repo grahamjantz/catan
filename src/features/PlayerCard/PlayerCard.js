@@ -6,6 +6,7 @@ import { collection, query, where, onSnapshot, doc, updateDoc } from "firebase/f
 import { dbFS } from '../SetVP/SetVP';
 import { useSearchParams } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import { buyImages } from '../../pictures';
 
 const PlayerCard = () => {
 
@@ -25,12 +26,12 @@ const PlayerCard = () => {
   const [playersListSorted, setPlayersListSorted] = useState()
   const [expansion, setExpansion] = useState('')
   const [pointsToWin, setPointsToWin] = useState(0)
+  const [playerColourImages, setPlayerColourImages] = useState({})
 
   const [searchParams, setSearchParams] = useSearchParams()
 
   const roomId = searchParams.get('room_id')
   const playerId = searchParams.get('player_id')
-  // const expansion = searchParams.get('expansion')
   
   useEffect(() => {
     const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
@@ -49,6 +50,12 @@ const PlayerCard = () => {
           if (player.player_id === playerId) {
             setItems(player.items)
             setVp(player.victory_points)
+            buyImages.map((colour) => {
+              if (colour.colour === player.colour.toLowerCase()) {
+                setPlayerColourImages(colour)
+              }
+              return ''
+            })
           }
           return ''
         })
@@ -201,7 +208,7 @@ const handleDecrementItem = async (item) => {
           } else {
             handleInsufficientFunds()
           }
-        } else if (item === 'activate-knight') {
+        } else if (item === 'activate knight') {
           if (player.items.wheat >= 1) {
             player.items.wheat--
           } else {
@@ -269,9 +276,10 @@ if (expansion === 'cities-knights') {
             ) : ''}
         </div>
   {/* ----------  GET RESOURCES ---------- */}
-        <div className='get-resource-actions'>
+        <div className='get-resource-actions cities'>
+        <h4>Card Count: {items.wood + items.sheep + items.ore + items.brick + items.wheat + items.paper + items.cloth + items.coin}</h4>
   {/* ---------- GET RESOURCE ACTIONS ROW 1 ---------- */}
-          <div>
+          {/* <div>
             <span>
               <div className='button-footer'>
                 <p>{items.wood}</p>
@@ -320,10 +328,10 @@ if (expansion === 'cities-knights') {
                 <button onClick={() => handleDecrementItem('coin')}>-1</button>
               </div>
             </span>
-          </div>
+          </div> */}
   
   {/* ---------- GET RESOURCE ACTIONS ROW 2 ---------- */}
-          <div>
+          {/* <div>
           <span>
               <div className='button-footer'>
                 <p>{items.brick}</p>
@@ -351,6 +359,89 @@ if (expansion === 'cities-knights') {
                 <button onClick={() => handleDecrementItem('vp')}>-1</button>
               </div>
             </span>
+          </div> */}
+
+          {/* ---------- GET RESOURCE ACTIONS ROW 1 ---------- */}
+          <div>
+            <span>
+              <div className='wood'>
+                <div>
+                  <button onClick={() => handleClickItem('wood')}>{items.wood}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('wood')}>-1</button>
+            </span>
+            <span>
+              <div className='sheep'>
+                <div>
+                  <button onClick={() => handleClickItem('sheep')}>{items.sheep}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('sheep')}>-1</button>
+            </span>
+            <span>
+              <div className='ore'>
+                <div>
+                  <button onClick={() => handleClickItem('ore')}>{items.ore}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('ore')}>-1</button>
+            </span>
+          </div>
+  
+  {/* ---------- GET RESOURCE ACTIONS ROW 2 ---------- */}
+          <div>
+          <span>
+              <div className='brick'>
+                <div>
+                  <button onClick={() => handleClickItem('brick')}>{items.brick}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('brick')}>-1</button>
+            </span>
+            <span>
+              <div className='wheat'>
+                <div>
+                  <button onClick={() => handleClickItem('wheat')}>{items.wheat}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('wheat')}>-1</button>
+            </span>
+            <span>
+              <div className='vp'>
+                <div>
+                  <button onClick={() => handleClickItem('vp')}>{vp}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('vp')}>-1</button>
+            </span>
+          </div>
+  {/* ---------- GET RESOURCE ACTIONS ROW 3 ---------- */}
+          <div>
+          <span>
+              <div className='paper'>
+                <div>
+                  <button onClick={() => handleClickItem('paper')}>{items.paper}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('paper')}>-1</button>
+            </span>
+            <span>
+              <div className='cloth'>
+                <div>
+                  <button onClick={() => handleClickItem('cloth')}>{items.cloth}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('cloth')}>-1</button>
+            </span>
+            <span>
+              <div className='coin'>
+                <div>
+                  <button onClick={() => handleClickItem('coin')}>{items.coin}</button>
+                </div>
+              </div>
+              <button onClick={() => handleDecrementItem('coin')}>-1</button>
+            </span>
           </div>
   
         </div>
@@ -359,7 +450,7 @@ if (expansion === 'cities-knights') {
         {insufficientFunds === true ? (
           <p>Insufficient Funds!</p>
         ) : ''}
-        <div className='buy-items'>
+        {/* <div className='buy-items'>
           <div>
             <button onClick={() => handleClickBuy('road')}>Road</button>
             <button onClick={() => handleClickBuy('settlement')}>Settlement</button>
@@ -371,15 +462,97 @@ if (expansion === 'cities-knights') {
             </span>
             <span className='city-buyers'>
               <button onClick={() => handleClickBuy('knight')}>Knight</button>
-              <button onClick={() => handleClickBuy('activate-knight')}>Activate Knight</button>
+              <button onClick={() => handleClickBuy('activate knight')}>Activate Knight</button>
             </span>
           </div>
-        </div>
+        </div> */}
+        {players === [] ? '' : (
+          players.map((player) => {
+            if (player.player_id !== playerId) {
+              return ''
+            } else {
+              return (
+                <div className='buy-items' key={player.player_id} style={{backgroundImage: `url(${playerColourImages.buildCosts})`, gap: '0', paddingTop: '2rem'}} >
+                  <button onClick={() => handleClickBuy('road')} 
+                    className={`road ${items.wood >= 1 && items.brick >=1 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.road})`
+                      }}
+                  ></button>
+                  <button onClick={() => handleClickBuy('settlement')} 
+                    className={`settlement ${items.wood >= 1 && items.brick >=1 && items.wheat >= 1 && items.sheep >=1
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.settlement})`
+                      }}
+                  ></button>
+                  <button onClick={() => handleClickBuy('city')} 
+                    className={`city ${items.ore >= 3 && items.wheat >= 2 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.city})`
+                      }}
+                    ></button>
+                  <button onClick={() => handleClickBuy('city wall')} 
+                    className={`city ${items.brick >= 2 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      // style={{
+                      //   backgroundImage: `url(${playerColourImages.city})`
+                      // }}
+                    >City Wall</button>
+                    <div style={{
+                      width: '80%',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}>
+                      <button onClick={() => handleClickBuy('knight')} 
+                        className={`dev card ${items.ore >= 1 && items.sheep >= 1 
+                          ? 'sufficient-funds' 
+                          : 'insufficient-funds'}`}
+                          style={{
+                            width: '50%'
+                            // backgroundImage: `url(${playerColourImages.dev})`
+                          }}
+                      >Knight</button>
+                      <button onClick={() => handleClickBuy('activate knight')} 
+                        className={`dev card ${items.wheat >= 1 
+                          ? 'sufficient-funds' 
+                          : 'insufficient-funds'}`}
+                          style={{
+                            width: '50%'
+                            // backgroundImage: `url(${playerColourImages.dev})`
+                          }}
+                      >Activate Knight</button>
+
+                    </div>
+                </div>
+              )
+            }
+          })
+        )
+        }
   
         <div className='city-improvements'>
-          <button onClick={() => handleClickBuy('yellow-city-improvement')}>Yellow City Improvement</button>
-          <button onClick={() => handleClickBuy('blue-city-improvement')}>Blue City Improvement</button>
-          <button onClick={() => handleClickBuy('green-city-improvement')}>Green City Improvement</button>
+          <button onClick={() => handleClickBuy('yellow-city-improvement')}
+            className={`yellow-city-improvement ${items.cloth >= 1 || items.sheep >= 2 
+              ? 'sufficient-funds' 
+              : 'insufficient-funds'}`}
+          >Yellow City Improvement</button>
+          <button onClick={() => handleClickBuy('blue-city-improvement')}
+            className={`blue-city-improvement ${items.coin >= 1 || items.ore >= 2 
+              ? 'sufficient-funds' 
+              : 'insufficient-funds'}`}
+          >Blue City Improvement</button>
+          <button onClick={() => handleClickBuy('green-city-improvement')}
+            className={`green-city-improvement ${items.paper >= 1 || items.wood >= 2 
+              ? 'sufficient-funds' 
+              : 'insufficient-funds'}`}
+          >Green City Improvement</button>
         </div>
         <Footer />
       </div>
@@ -468,27 +641,51 @@ if (expansion === 'cities-knights') {
         {insufficientFunds === true ? (
           <p>Insufficient Funds!</p>
         ) : ''}
-        <div className='buy-items'>
-          <button onClick={() => handleClickBuy('road')} className={`road ${items.wood >= 1 && items.brick >=1 ? 'sufficient-funds' : 'insufficient-funds'}`}></button>
-          <button onClick={() => handleClickBuy('settlement')} 
-            className={`settlement 
-              ${items.wood >= 1 && items.brick >=1 && items.wheat >= 1 && items.sheep >=1
-              ? 'sufficient-funds' 
-              : 'insufficient-funds'}`}
-          ></button>
-          <button onClick={() => handleClickBuy('city')} 
-            className={`city 
-              ${items.ore >= 3 && items.wheat >= 2 
-              ? 'sufficient-funds' 
-              : 'insufficient-funds'}`}
-            ></button>
-          <button onClick={() => handleClickBuy('dev card')} 
-            className={`dev card 
-              ${items.ore >= 1 && items.wheat >= 1 && items.sheep >= 1 
-              ? 'sufficient-funds' 
-              : 'insufficient-funds'}`}
-          ></button>
-        </div>
+        {players === [] ? '' : (
+          players.map((player) => {
+            if (player.player_id !== playerId) {
+              return ''
+            } else {
+              return (
+                <div className='buy-items' key={player.player_id} style={{backgroundImage: `url(${playerColourImages.buildCosts})`}}>
+                  <button onClick={() => handleClickBuy('road')} 
+                    className={`road ${items.wood >= 1 && items.brick >=1 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.road})`
+                      }}
+                  ></button>
+                  <button onClick={() => handleClickBuy('settlement')} 
+                    className={`settlement ${items.wood >= 1 && items.brick >=1 && items.wheat >= 1 && items.sheep >=1
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.settlement})`
+                      }}
+                  ></button>
+                  <button onClick={() => handleClickBuy('city')} 
+                    className={`city ${items.ore >= 3 && items.wheat >= 2 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.city})`
+                      }}
+                    ></button>
+                  <button onClick={() => handleClickBuy('dev card')} 
+                    className={`dev card ${items.ore >= 1 && items.wheat >= 1 && items.sheep >= 1 
+                      ? 'sufficient-funds' 
+                      : 'insufficient-funds'}`}
+                      style={{
+                        backgroundImage: `url(${playerColourImages.dev})`
+                      }}
+                  ></button>
+                </div>
+              )
+            }
+          })
+        )
+        }
         <Footer />
       </div>
     )
