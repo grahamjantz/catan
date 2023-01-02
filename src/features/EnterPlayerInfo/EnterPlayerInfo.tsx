@@ -16,6 +16,7 @@ const EnterPlayerInfo = () : any => {
 
   const roomId = searchParams.get('room_id')
 
+
   const generatePlayerId = () => {
     let id;
     for (let i=0; i<8; i++) {

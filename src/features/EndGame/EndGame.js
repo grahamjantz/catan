@@ -9,9 +9,8 @@ import { dbFS } from '../SetVP/SetVP';
 
 const EndGame = () => {
 
-    const [players, setPlayers] = useState([])
     const [playersListSorted, setPlayersListSorted] = useState([])
-    console.log(players)
+    const [winner, setWinner] = useState({})
 
     const [searchParams, setSearchParams] = useSearchParams()
 
@@ -24,10 +23,11 @@ const EndGame = () => {
         querySnapshot.forEach((doc) => {
           players.push(doc.data().players);
         });
-        setPlayers(players[0])
+
         if (players[0] !== []) {
           const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
           setPlayersListSorted(sort)
+          setWinner(sort[0])
         }
       });
       return () => {
@@ -39,13 +39,13 @@ const EndGame = () => {
     <div className='end-game'>
         <div>
             <h2>Winner: </h2>
-            <h2>{playersListSorted ? playersListSorted[0].name : ''}</h2>
+            <h2>{winner !== {} ? winner.name : ''}</h2>
         </div>
         <ul>
             {playersListSorted !== [] ? (
                 playersListSorted.map((player) => {
                     return (
-                        <li>
+                        <li key={player.player_id}>
                             <h3>{player.name}</h3>
                             <h3>{player.victory_points}</h3>
                         </li>

@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     gap: 10rem;
+    background-color: var(--main-beige);
+    padding: 2rem;
+    border-radius: 7px;
 }
 
 .end-game div {
@@ -14,6 +17,7 @@
 }
 
 .end-game ul li {
+    color: black;
     display: flex;
     justify-content: space-between;
 }
