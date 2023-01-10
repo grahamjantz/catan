@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import './EndGame.css'
 
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { dbFS } from '../SetVP/SetVP';
@@ -10,11 +10,11 @@ import { dbFS } from '../SetVP/SetVP';
 const EndGame = () => {
 
     const [playersListSorted, setPlayersListSorted] = useState([])
-    const [winner, setWinner] = useState({})
 
     const [searchParams, setSearchParams] = useSearchParams()
 
     const roomId = searchParams.get('room_id')
+    const navigate = useNavigate()
 
     useEffect(() => {
       const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
@@ -27,7 +27,6 @@ const EndGame = () => {
         if (players[0] !== []) {
           const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
           setPlayersListSorted(sort)
-          setWinner(sort[0])
         }
       });
       return () => {
@@ -35,12 +34,22 @@ const EndGame = () => {
       }
     }, [roomId])
 
+    const handleClickHome = () => {
+      navigate('/')
+    }
+
   return (
     <div className='end-game'>
+      {playersListSorted[0] ? (
         <div>
+          <h2>Winner: </h2>
+          <h2>{playersListSorted[0].name}</h2>
+        </div>
+      ) : ''}
+        {/* <div>
             <h2>Winner: </h2>
             <h2>{winner !== {} ? winner.name : ''}</h2>
-        </div>
+        </div> */}
         <ul>
             {playersListSorted !== [] ? (
                 playersListSorted.map((player) => {
@@ -53,6 +62,7 @@ const EndGame = () => {
                 })
             ) : ''}
         </ul>
+        <button onClick={handleClickHome}>Return to home</button>
     </div>
   )
 }

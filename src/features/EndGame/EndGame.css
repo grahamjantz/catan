@@ -3,6 +3,7 @@
     width: 90%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10rem;
     background-color: var(--main-beige);
     padding: 2rem;
@@ -14,6 +15,18 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.end-game button {
+    height: 50px;
+    width: 200px;
+}
+
+.end-game ul {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .end-game ul li {
