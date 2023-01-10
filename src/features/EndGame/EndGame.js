@@ -43,7 +43,8 @@ const EndGame = () => {
           const docSnap = await getDoc(docRef);
       
           if (docSnap.exists()) {
-              const sort = docSnap.data().players.sort((a,b) => b.net_worth - a.net_worth).sort((a, b) => b.active - a.active)
+            console.log(docSnap.data())
+              const sort = docSnap.data().players.sort((a,b) => b.victory_points - a.victory_points).sort((a, b) => b.active - a.active)
               setPlayersListSorted(sort)
           } else {
           // doc.data() will be undefined in this case
