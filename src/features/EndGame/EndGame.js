@@ -4,7 +4,7 @@ import './EndGame.css'
 
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { dbFS } from '../SetVP/SetVP';
 
 const EndGame = () => {
@@ -16,23 +16,42 @@ const EndGame = () => {
     const roomId = searchParams.get('room_id')
     const navigate = useNavigate()
 
-    useEffect(() => {
-      const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const players= [];
-        querySnapshot.forEach((doc) => {
-          players.push(doc.data().players);
-        });
+    // useEffect(() => {
+    //   const fetchQuery = () => {
+    //     const q = query(collection(dbFS, "rooms"), where("room_id", "==", roomId));
+    //     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    //       const players= [];
+    //       querySnapshot.forEach((doc) => {
+    //         players.push(doc.data().players);
+    //       });
+  
+    //       if (players[0] !== []) {
+    //         const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
+    //         setPlayersListSorted(sort)
+    //       }
+    //     });
+    //     return () => {
+    //       unsubscribe()
+    //     }
+    //   }
+    //   fetchQuery()
+    // }, [roomId])
 
-        if (players[0] !== []) {
-          const sort = players[0].sort((a, b) => b.active - a.active).sort((a, b) => b.victory_points - a.victory_points)
-          setPlayersListSorted(sort)
-        }
-      });
-      return () => {
-        unsubscribe()
+    useEffect(() => {
+      const fetchQuery = async () => {
+          const docRef = doc(dbFS, "rooms", roomId);
+          const docSnap = await getDoc(docRef);
+      
+          if (docSnap.exists()) {
+              const sort = docSnap.data().players.sort((a,b) => b.net_worth - a.net_worth).sort((a, b) => b.active - a.active)
+              setPlayersListSorted(sort)
+          } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+          }
       }
-    }, [roomId])
+      fetchQuery()
+  }, [roomId])
 
     const handleClickHome = () => {
       navigate('/')
